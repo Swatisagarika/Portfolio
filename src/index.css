@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css */
+html, body {
+  background-color: #0e1525; /* Matches your UI */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Optional: Smooth scrolling for navbar links */
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .rotate-ring {
+    position: relative;
+    width: 350px;
+    height: 350px;
+  }
+
+  .rotate-ring::before,
+  .rotate-ring::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: conic-gradient(transparent, transparent, transparent, #4cd137);
+    animation: rotate-border 10s linear infinite;
+  }
+
+  .rotate-ring::after {
+    animation-delay: -5s;
+  }
+
+  @keyframes rotate-border {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@layer components {
+  .typing {
+    position: relative;
+    display: inline-block;
+    width: 180px; /* longest word width */
+    height: 1.2em;
+    vertical-align: bottom;
+  }
+
+  .typing span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px #4cd137; /* outline effect */
+  opacity: 0;
+  animation: showWord 9s linear infinite;
+  animation-delay: calc((var(--i) - 1) * 3s);
+}
+@keyframes showWord {
+    0%, 20% { opacity: 0; }
+  25%, 55% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+  }
+
+  .typing span::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #4cd137;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  border-right: 2px solid transparent; /* hidden by default */
+  animation: typing 9s linear infinite;
+  animation-delay: calc((var(--i) - 1) * 3s);
+}
+
+
+  @keyframes typing {
+  0% {
+    width: 0;
+    border-color: transparent;
+  }
+  10% {
+    width: 0;
+    border-color: #4cd137;
+  }
+  40% {
+    width: 100%;
+    border-color: #4cd137;
+  }
+  60% {
+    width: 100%;
+    border-color: transparent;
+  }
+  100% {
+    width: 0;
+    border-color: transparent;
+  }
+}
+
+
+  
+}
+
+
+
