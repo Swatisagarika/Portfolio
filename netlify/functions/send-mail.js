@@ -12,21 +12,22 @@ exports.handler = async (event) => {
       },
     });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `Portfolio Contact from ${name}`,
-      html: `
-        <h2>New Contact Form</h2>
+   await transporter.sendMail({
+  from: process.env.EMAIL_USER,
+  to: process.env.EMAIL_USER,
+  cc: process.env.CC_MAILS,
+  subject: `Portfolio Contact from ${name}`,
+  html: `
+    <h2>New Contact Form</h2>
 
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Message:</b></p>
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Phone:</b> ${phone}</p>
+    <p><b>Message:</b></p>
 
-        <p>${message}</p>
-      `,
-    });
+    <p>${message}</p>
+  `,
+});
 
     return {
       statusCode: 200,
