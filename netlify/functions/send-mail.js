@@ -7,14 +7,14 @@ exports.handler = async (event) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASSWORD,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: process.env.SMTP_EMAIL,
-      to: process.env.SMTP_EMAIL,
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
       subject: `Portfolio Contact from ${name}`,
       html: `
         <h2>New Contact Form</h2>
