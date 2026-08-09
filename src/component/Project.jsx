@@ -4,6 +4,11 @@ import Navbar from "./Navbar";
 import lmsAdmin from "../assets/lms-admin.png";
 import lmsInstructor from "../assets/lms-instructor.png";
 import lmsStudent from "../assets/lms-student.png";
+// Hms images
+import hmsAdmin from "../assets/hms-admin.png";
+import hmsDoctor from "../assets/hms-doctor.png";
+import hmsNurse from "../assets/hms-nurse.png";
+import hmsPatient from "../assets/hms-patient.png";
 // urban images
 import home from "../assets/home.png";
 import service from "../assets/service.png";
@@ -25,7 +30,7 @@ function Projects({ hideNavbar }) {
       desc:
         "A web-based Hospital Management System designed to manage doctors, patients, appointments, and medicines efficiently.",
       tech: "React, Node.js, Express, MySQL",
-      images: ["https://via.placeholder.com/900x520?text=Hospital+Management"],
+      images: [hmsAdmin, hmsDoctor, hmsNurse,hmsPatient],
     },
     {
       id: "03",
