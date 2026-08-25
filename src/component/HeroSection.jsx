@@ -1,5 +1,5 @@
 import React from "react";
-import profileImg from "../assets/profile.jpg";
+import profileImg from "../assets/profile.png";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Navbar from "./Navbar";
 import Services from "./Services";
