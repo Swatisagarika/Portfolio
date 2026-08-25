@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 
 
-function Contact({hideNavbar}) {
+function Contact({ hideNavbar }) {
   // ✅ ALREADY PRESENT (kept as-is)
   const [formData, setFormData] = React.useState({
     name: "",
@@ -23,56 +23,56 @@ function Contact({hideNavbar}) {
 
   // ✅ ADD: handleSubmit (FETCH API)
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  // ✅ Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // ✅ Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // ✅ Phone validation (10 digits only)
-  const phoneRegex = /^[0-9]{10}$/;
+    // ✅ Phone validation (10 digits only)
+    const phoneRegex = /^[0-9]{10}$/;
 
-  if (!emailRegex.test(formData.email)) {
-    alert("Please enter a valid email address");
-    return;
-  }
-
-  if (formData.phone && !phoneRegex.test(formData.phone)) {
-    alert("Phone number must be exactly 10 digits");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    const response = await fetch("/.netlify/functions/send-mail",{
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Something went wrong");
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address");
+      return;
     }
 
-    // ✅ SUCCESS ALERT
-    alert("✅ Message sent successfully!");
+    if (formData.phone && !phoneRegex.test(formData.phone)) {
+      alert("Phone number must be exactly 10 digits");
+      return;
+    }
 
-    // ✅ Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
+    setLoading(true);
 
-  } catch (error) {
-    alert("❌ Failed to send message");
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      const response = await fetch("/.netlify/functions/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      // ✅ SUCCESS ALERT
+      alert("✅ Message sent successfully!");
+
+      // ✅ Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+
+    } catch (error) {
+      alert("❌ Failed to send message");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div id="contact" className="min-h-screen bg-[#0e1525] text-white">
@@ -182,18 +182,28 @@ function Contact({hideNavbar}) {
 
               {/* Phone */}
               <input
-                type="text"
-                name="phone"                        // ✅ ADD
-                value={formData.phone}              // ✅ ADD
-                onChange={handleChange}             // ✅ ADD
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+                  if (value.length <= 10) {
+                    setFormData({
+                      ...formData,
+                      phone: value
+                    });
+                  }
+                }}
                 placeholder="Phone Number"
+                maxLength={10}
+                inputMode="numeric"
                 className="
-                  contact-input w-full p-3 rounded-lg
-                  bg-white/5 border border-white/20
-                  placeholder-gray-400 text-white
-                  focus:outline-none focus:ring-2 focus:ring-green-500/60
-                  transition-all duration-300
-                "
+    contact-input w-full p-3 rounded-lg
+    bg-white/5 border border-white/20
+    placeholder-gray-400 text-white
+    focus:outline-none focus:ring-2 focus:ring-green-500/60
+    transition-all duration-300
+  "
               />
 
               {/* Message */}
