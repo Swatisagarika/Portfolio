@@ -240,7 +240,7 @@ function About() {
           <span className="text-[#4cd137]">Gender: </span>Female
         </h5>
         <h5 className="w-1/2 px-4 text-sm font-normal mb-2">
-          <span className="text-[#4cd137]">Age: </span>24 Years Old
+          <span className="text-[#4cd137]">Age: </span>26 Years Old
         </h5>
         <h5 className="w-1/2 px-4 text-sm font-normal mb-2">
           <span className="text-[#4cd137]">Status: </span>UnMarried
